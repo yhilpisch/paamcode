@@ -29,6 +29,7 @@ The material follows the structure of the book *Python and AI for Asset Manageme
 
 - `notebooks/` — chapter and appendix notebooks (`chXX_*.ipynb`, `appx_*.ipynb`) that bring together concepts, code, and plots.
 - `code/` — standalone Python modules and helper scripts used for figures, simulations, and risk and performance calculations.
+- `data/` — source CSV datasets required by the notebooks and scripts (for example, `pyaiam_eod.csv`); generated artifacts such as Parquet files are intentionally excluded from sync.
 
 See the `README.md` files inside `notebooks/` and `code/` for concise per-file overviews.
 
