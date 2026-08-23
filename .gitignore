@@ -10,6 +10,8 @@ Icon?
 *.pdf
 *.log
 figures/
+!code/figures/
+!code/figures/*.py
 reports/
 *.parquet
 # Python bytecode and cache
