@@ -3,7 +3,7 @@ Python & AI in Asset Management
 Chapter 15 · Deep Learning for Cross-Sectional and Panel Data
 
 (c) Dr. Yves J. Hilpisch
-AI-Powered by GPT 5.1
+AI-Powered by different LLMs
 The Python Quants GmbH | https://tpq.io
 https://hilpisch.com | https://linktr.ee/dyjh
 """
