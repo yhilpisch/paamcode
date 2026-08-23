@@ -30,7 +30,10 @@ prices = pd.read_csv(DATA_PATH,
 parse_dates=['Date']).set_index('Date').sort_index().ffill()
 log_rets = np.log(prices['AAPL'] / prices['AAPL'].shift(1)).dropna()
 X_np = log_rets.shift(1).dropna().values.astype(np.float32).reshape(-1, 1)
-y_np = log_rets.reindex(log_rets.shift(1).dropna().index).values.astype(np.float32)
+y_np = (
+    log_rets.reindex(log_rets.shift(1).dropna().index)
+    .values.astype(np.float32)
+)
 X = torch.from_numpy(X_np)
 y = torch.from_numpy(y_np)
 train_ds = TensorDataset(X, y)

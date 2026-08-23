@@ -18,7 +18,9 @@ log_ret = pd.Series(
 )  # toy daily log-returns
 
 portfolio_value_raw = np.exp(log_ret.cumsum())  # unscaled portfolio path
-portfolio_value = portfolio_value_raw / portfolio_value_raw.iloc[0]  # start at 1.0
+portfolio_value = (
+    portfolio_value_raw / portfolio_value_raw.iloc[0]
+)  # start at 1.0
 
 fig, ax = plt.subplots(figsize=(8, 3))  # create figure and axis
 ax.plot(

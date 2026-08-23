@@ -25,7 +25,8 @@ TAU = 0.05
 
 # %% cell 6
 assets = ["AAPL", "NVDA", "JPM", "SPY", "GLD", "TLT"]
-prices = pd.read_csv(DATA_PATH, parse_dates=["Date"]).set_index("Date").sort_index()
+prices = (pd.read_csv(DATA_PATH, parse_dates=["Date"])
+          .set_index("Date").sort_index())
 prices = prices.ffill()
 log_rets = np.log(prices / prices.shift(1)).dropna()[assets]
 mean_returns = log_rets.mean() * 252
@@ -48,14 +49,21 @@ Q = np.array([0.01, 0.005])
 OMEGA = np.diag([0.0004, 0.0009])
 
 # %% cell 12
-def black_litterman(cov: np.ndarray, tau: float, pi_vec: np.ndarray, P: np.ndarray,
-Q: np.ndarray, omega: np.ndarray):
+def black_litterman(
+    cov: np.ndarray,
+    tau: float,
+    pi_vec: np.ndarray,
+    P: np.ndarray,
+    Q: np.ndarray,
+    omega: np.ndarray,
+):
     tau_cov = tau * cov
     inv_tau_cov = np.linalg.inv(tau_cov)
     middle = P.T @ np.linalg.inv(omega) @ P
     posterior_cov = np.linalg.inv(inv_tau_cov + middle)
-    posterior_mean = posterior_cov @ (inv_tau_cov @ pi_vec + P.T @ np.linalg.inv(omega) @
-        Q)
+    posterior_mean = posterior_cov @ (
+        inv_tau_cov @ pi_vec + P.T @ np.linalg.inv(omega) @ Q
+    )
     return posterior_mean, posterior_cov
 
 post_mean, post_cov = black_litterman(
@@ -97,7 +105,9 @@ rng = np.random.default_rng(123)
 n_ports = 4000
 weights = rng.dirichlet(np.ones(len(assets)), size=n_ports)
 prior_returns = weights @ pi
-prior_vols = np.sqrt(np.einsum("bi,ij,bj->b", weights, cov_matrix.values, weights))
+prior_vols = np.sqrt(
+    np.einsum("bi,ij,bj->b", weights, cov_matrix.values, weights)
+)
 post_returns = weights @ post_mean
 post_vols = np.sqrt(np.einsum("bi,ij,bj->b", weights, post_cov, weights))
 fig, ax = plt.subplots(figsize=(12, 6))

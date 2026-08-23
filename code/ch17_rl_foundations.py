@@ -43,7 +43,10 @@ class PortfolioEnv:
         return window.pct_change().mean().fillna(0).values
 
     def step(self, action):  # action in {-1, 0, 1}
-        ret = self.prices.iloc[self.t + 1]["AAPL"] / self.prices.iloc[self.t]["AAPL"] - 1
+        ret = (
+            self.prices.iloc[self.t + 1]["AAPL"]
+            / self.prices.iloc[self.t]["AAPL"] - 1
+        )
         reward = action * ret - self.cost * abs(action)
         self.wealth *= (1 + reward)
         self.t += 1
@@ -74,6 +77,9 @@ for episode in range(n_episodes):
     value += G
     if (episode + 1) % 50 == 0:
         avg_so_far = value / (episode + 1)
-        print(f"Episode {episode + 1}/{n_episodes}: avg return {avg_so_far:.6f}")
+        print(
+            f"Episode {episode + 1}/{n_episodes}: "
+            f"avg return {avg_so_far:.6f}"
+        )
 
 value / n_episodes

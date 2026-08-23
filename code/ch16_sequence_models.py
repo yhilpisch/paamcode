@@ -72,7 +72,9 @@ def train_seq(model, epochs=5):
             optimizer.step()
         model.eval()
         with torch.no_grad():
-            val_losses = [loss_fn(model(xb), yb).item() for xb, yb in val_loader]
+            val_losses = [
+                loss_fn(model(xb), yb).item() for xb, yb in val_loader
+            ]
         print(f"Epoch {epoch+1}, val loss {np.mean(val_losses):.6f}")
 
 train_seq(lstm_model, epochs=5)
@@ -87,7 +89,9 @@ class SimpleTransformer(nn.Module):
             nhead=nhead,
             batch_first=True,
         )
-        self.encoder = nn.TransformerEncoder(encoder_layer, num_layers=num_layers)
+        self.encoder = nn.TransformerEncoder(
+            encoder_layer, num_layers=num_layers
+        )
         self.out = nn.Linear(d_model, 1)
 
     def forward(self, x):
@@ -109,5 +113,7 @@ for epoch in range(3):
         opt_trans.step()
     transformer.eval()
     with torch.no_grad():
-        val_losses = [loss_fn(transformer(xb), yb).item() for xb, yb in val_loader]
+        val_losses = [
+            loss_fn(transformer(xb), yb).item() for xb, yb in val_loader
+        ]
     print(f"Epoch {epoch+1}, val loss {np.mean(val_losses):.6f}")

@@ -73,7 +73,9 @@ class SimpleAgent:
         if task == 'diagnose_strategy':
             asset = kwargs.get('asset', 'AAPL')
             report = strategy_report(asset)
-            self.history.append({'task': task, 'asset': asset, 'report': report})
+            self.history.append(
+                {'task': task, 'asset': asset, 'report': report}
+            )
             return report
         msg = {'error': f'Unknown task: {task}'}
         self.history.append(msg)

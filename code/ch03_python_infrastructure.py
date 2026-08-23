@@ -37,7 +37,8 @@ env = pd.Series(
 env
 
 # %% cell 8
-prices = pd.read_csv(DATA_PATH, parse_dates=["Date"]).set_index("Date").sort_index()
+prices = (pd.read_csv(DATA_PATH, parse_dates=["Date"])
+          .set_index("Date").sort_index())
 prices.head()
 
 # %% cell 10
@@ -66,7 +67,9 @@ weekly = resample_prices(prices_clean)
 weekly.head()
 
 # %% cell 17
-def rolling_features(log_returns: pd.DataFrame, window: int = 21) -> pd.DataFrame:
+def rolling_features(
+    log_returns: pd.DataFrame, window: int=21
+) -> pd.DataFrame:
     vol = log_returns.rolling(window).std() * np.sqrt(252)
     mom = log_returns.rolling(window).sum()
     out = pd.concat({"vol": vol, "mom": mom}, axis=1)

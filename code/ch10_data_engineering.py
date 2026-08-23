@@ -22,7 +22,8 @@ if not DATA_PATH.exists():
     DATA_PATH = "https://hilpisch.com/pyaiam_eod.csv"
 
 # %% cell 6
-prices = pd.read_csv(DATA_PATH, parse_dates=["Date"]).set_index("Date").sort_index()
+prices = (pd.read_csv(DATA_PATH, parse_dates=["Date"])
+          .set_index("Date").sort_index())
 summary = pd.DataFrame({
     "min": prices.min(),
     "max": prices.max(),
@@ -86,7 +87,9 @@ feature_panel.to_parquet(path)
 path
 
 # %% cell 18
-def data_quality_report(raw: pd.DataFrame, cleaned: pd.DataFrame) -> pd.DataFrame:
+def data_quality_report(
+    raw: pd.DataFrame, cleaned: pd.DataFrame
+) -> pd.DataFrame:
     return pd.DataFrame(
         {
             "pct_missing_before": raw.isna().mean(),

@@ -34,7 +34,10 @@ CONFIG
 
 # %% cell 8
 def make_logger(name: str = 'pyaiam') -> logging.Logger:
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s %(levelname)s %(message)s',
+    )
     return logging.getLogger(name)
 
 logger = make_logger()

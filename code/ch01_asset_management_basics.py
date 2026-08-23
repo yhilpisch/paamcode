@@ -38,14 +38,20 @@ def display_frame(frame: pd.DataFrame) -> None:
 
 
 # %% cell 6
-raw = pd.read_csv(DATA_PATH, parse_dates=["Date"]).set_index("Date").sort_index()
+raw = (pd.read_csv(DATA_PATH, parse_dates=["Date"])
+       .set_index("Date").sort_index())
 raw.head()
 # --> remove final empty rows
 
 # %% cell 7
-stats = raw.describe().T.assign(non_null=raw.notna().sum(), missing=raw.isna().sum())
+stats = raw.describe().T.assign(
+    non_null=raw.notna().sum(), missing=raw.isna().sum()
+)
 display_frame(stats)
-print(f"Date range: {raw.index.min().date()} → {raw.index.max().date()} ({len(raw):,} rows)")
+print(
+    f"Date range: {raw.index.min().date()} → {raw.index.max().date()} "
+    f"({len(raw):,} rows)"
+)
 
 # %% cell 9
 def prepare_return_panels(price_frame: pd.DataFrame) -> dict:
@@ -62,10 +68,13 @@ log_rets.head()
 # %% cell 11
 fig, axes = plt.subplots(2, 1, figsize=(12, 10), sharex=True)
 selected = ["AAPL", "NVDA", "GLD", "TLT", "BTC-USD", "EURUSD"]
-(panels["prices"][selected] / panels["prices"][selected].iloc[0]).plot(ax=axes[0], linewidth=1.1, alpha=0.9)
+(panels["prices"][selected] / panels["prices"][selected].iloc[0]).plot(
+    ax=axes[0], linewidth=1.1, alpha=0.9
+)
 axes[0].set_title("Indexed Price Paths (start = 1.0)")
 axes[0].set_ylabel("Index Level")
-log_rets[selected].rolling(63).std().mul(np.sqrt(252)).plot(ax=axes[1], linewidth=1.1, alpha=0.9)
+(log_rets[selected].rolling(63).std().mul(np.sqrt(252))
+ .plot(ax=axes[1], linewidth=1.1, alpha=0.9))
 axes[1].set_title("Rolling 3-Month Annualized Volatility")
 axes[1].set_ylabel("Annualized Volatility")
 # plt.tight_layout()
@@ -106,7 +115,9 @@ mandate
 # %% cell 15
 latest_prices = panels["prices"].iloc[-1]
 annualized_vol = log_rets.std() * np.sqrt(252)
-sample_weights = pd.Series(1 / len(base_universe), index=base_universe, name="eq_weight")
+sample_weights = pd.Series(
+    1 / len(base_universe), index=base_universe, name="eq_weight"
+)
 alloc_overview = pd.DataFrame({
     "price": latest_prices,
     "annualized_vol": annualized_vol,
@@ -141,13 +152,19 @@ fig.colorbar(scatter, label="Annualized Volatility")
 plt.show()
 
 # %% cell 18
-def describe_portfolio(log_returns: pd.DataFrame, weights: pd.Series, risk_free_rate: float = 0.02):
+def describe_portfolio(
+    log_returns: pd.DataFrame,
+    weights: pd.Series,
+    risk_free_rate: float=0.02,
+):
     aligned = log_returns[weights.index].dropna()
     port_log = aligned.mul(weights).sum(axis=1)
     ann_return = port_log.mean() * 252
     ann_vol = port_log.std() * np.sqrt(252)
     sharpe = (ann_return - risk_free_rate) / ann_vol if ann_vol > 0 else np.nan
-    max_dd = (np.exp(port_log.cumsum()) / np.exp(port_log.cumsum()).cummax() - 1).min()
+    max_dd = (
+        np.exp(port_log.cumsum()) / np.exp(port_log.cumsum()).cummax() - 1
+    ).min()
     return pd.Series(
         {
             "annualized_return": ann_return,

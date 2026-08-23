@@ -65,5 +65,7 @@ vec[positive_mask], vec_squared
 
 # %% cell 18
 wide = prices[['AAPL', 'SPY']].iloc[-5:]
-long = wide.reset_index().melt(id_vars='Date', var_name='ticker', value_name='price')
+long = wide.reset_index().melt(
+    id_vars='Date', var_name='ticker', value_name='price'
+)
 long.head()

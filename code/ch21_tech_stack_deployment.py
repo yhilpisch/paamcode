@@ -48,7 +48,8 @@ logger.info("Logger initialized")
 # %% cell 12
 def ingest(path: Path) -> pd.DataFrame:
     logger.info("Loading %s", path)
-    return pd.read_csv(path, parse_dates=["Date"]).set_index("Date").sort_index()
+    return (pd.read_csv(path, parse_dates=["Date"])
+            .set_index("Date").sort_index())
 
 def engineer(df: pd.DataFrame) -> pd.DataFrame:
     logger.info("Engineering rolling features")
@@ -80,9 +81,13 @@ send_alert("Pipeline completed (demo)")
 
 # %% cell 16
 import textwrap
-crontab = textwrap.dedent("""
+cron_cmd = (
+    "0 6 * * 1-5 /usr/bin/python /repo/scripts/run_pipeline.py"
+    " >> /repo/logs/pipeline.log"
+)
+crontab = textwrap.dedent(f"""
 # Run pipeline weekdays at 06:00 UTC
-0 6 * * 1-5 /usr/bin/python /repo/scripts/run_pipeline.py >> /repo/logs/pipeline.log
+{cron_cmd}
 2>&1
 """)
 print(crontab)

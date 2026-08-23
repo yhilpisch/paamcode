@@ -25,7 +25,8 @@ RISK_FREE_ANNUAL = 0.02
 RISK_FREE_DAILY = RISK_FREE_ANNUAL / 252
 
 # %% cell 6
-prices = pd.read_csv(DATA_PATH, parse_dates=["Date"]).set_index("Date").sort_index()
+prices = (pd.read_csv(DATA_PATH, parse_dates=["Date"])
+          .set_index("Date").sort_index())
 prices = prices.ffill()
 log_rets = np.log(prices / prices.shift(1)).dropna()
 excess_rets = log_rets.subtract(RISK_FREE_DAILY)
@@ -33,7 +34,9 @@ excess_rets.head()
 
 # %% cell 8
 def regression_frame(asset: str, market: str = "SPY") -> pd.DataFrame:
-    frame = pd.DataFrame({"asset": excess_rets[asset], "market": excess_rets[market]})
+    frame = pd.DataFrame(
+        {"asset": excess_rets[asset], "market": excess_rets[market]}
+    )
     return frame.dropna()
 
 capm_data = regression_frame("AAPL")

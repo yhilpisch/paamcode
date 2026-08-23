@@ -22,7 +22,8 @@ if not DATA_PATH.exists():
     DATA_PATH = "https://hilpisch.com/pyaiam_eod.csv"
 
 # %% cell 6
-prices = pd.read_csv(DATA_PATH, parse_dates=["Date"]).set_index("Date").sort_index()
+prices = (pd.read_csv(DATA_PATH, parse_dates=["Date"])
+          .set_index("Date").sort_index())
 prices = prices.ffill()
 log_rets = np.log(prices / prices.shift(1)).dropna()
 assets = ["AAPL", "NVDA", "JPM", "SPY", "GLD", "TLT"]
@@ -32,7 +33,9 @@ cov_matrix = log_rets.cov() * 252
 exp_returns
 
 # %% cell 8
-def portfolio_stats(weights: np.ndarray, mean_vec: np.ndarray, cov_mat: np.ndarray) -> tuple[float, float]:
+def portfolio_stats(
+    weights: np.ndarray, mean_vec: np.ndarray, cov_mat: np.ndarray
+) -> tuple[float, float]:
     port_ret = weights @ mean_vec
     port_vol = np.sqrt(weights @ cov_mat @ weights)
     return port_ret, port_vol
@@ -43,8 +46,10 @@ risk_free = 0.02
 rng = np.random.default_rng(7)
 n_ports = 8000
 weights = rng.dirichlet(np.ones(len(assets)), size=n_ports)
-port_metrics = np.array([portfolio_stats(w, exp_returns.values, cov_matrix.values)
-for w in weights])
+port_metrics = np.array(
+    [portfolio_stats(w, exp_returns.values, cov_matrix.values)
+     for w in weights]
+)
 port_returns = port_metrics[:, 0]
 port_vols = port_metrics[:, 1]
 sharpe = (port_returns - risk_free) / port_vols
@@ -66,7 +71,9 @@ gmv_ret, gmv_vol = portfolio_stats(gmv_weights, exp_returns.values,
 cov_matrix.values)
 ms_weights = (cov_inv @ (exp_returns.values - risk_free * ones))
 ms_weights = ms_weights / np.sum(ms_weights)
-ms_ret, ms_vol = portfolio_stats(ms_weights, exp_returns.values, cov_matrix.values)
+ms_ret, ms_vol = portfolio_stats(
+    ms_weights, exp_returns.values, cov_matrix.values
+)
 pd.DataFrame(
     {
         "gmv": gmv_weights,

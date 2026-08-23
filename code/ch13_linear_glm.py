@@ -27,7 +27,8 @@ from sklearn.linear_model import Ridge, Lasso, LogisticRegression
 from sklearn.metrics import mean_squared_error, roc_auc_score
 
 # %% cell 7
-prices = pd.read_csv(DATA_PATH, parse_dates=["Date"]).set_index("Date").sort_index()
+prices = (pd.read_csv(DATA_PATH, parse_dates=["Date"])
+          .set_index("Date").sort_index())
 
 # %% cell 8
 panel = prices.ffill().pct_change()

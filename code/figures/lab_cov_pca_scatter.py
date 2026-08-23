@@ -40,7 +40,10 @@ fig, ax = plt.subplots(figsize=(7, 5))
 ax.scatter(y[:, 0], y[:, 1], s=45, color="#1f77b4")
 
 for i, name in enumerate(states):
-    ax.annotate(name, (y[i, 0], y[i, 1]), textcoords="offset points", xytext=(6, 6))
+    ax.annotate(
+        name, (y[i, 0], y[i, 1]),
+        textcoords="offset points", xytext=(6, 6),
+    )
 
 ax.axhline(0.0, linewidth=0.8, color="black")
 ax.axvline(0.0, linewidth=0.8, color="black")

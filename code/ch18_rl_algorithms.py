@@ -108,7 +108,9 @@ def run_policy(policy_vals, episodes=20):
         total = 0
         while not done:
             key = discretize(state)
-            action = actions[np.argmax(policy_vals.get(key, np.zeros(len(actions))))]
+            action = actions[
+                np.argmax(policy_vals.get(key, np.zeros(len(actions))))
+            ]
             state, reward, done = env.step(action)
             total += reward
         rewards.append(total)

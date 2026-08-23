@@ -68,7 +68,9 @@ else:
         'train_start': '2020-01-01',
         'train_end': '2025-01-01',
     }
-prompt = render_prompt('experiment_summary', metadata=json.dumps(metadata, indent=2))
+prompt = render_prompt(
+    'experiment_summary', metadata=json.dumps(metadata, indent=2)
+)
 print(llm.complete(prompt))
 
 # %% cell 14

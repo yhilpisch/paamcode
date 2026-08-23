@@ -60,7 +60,9 @@ def main() -> None:
     w = np.array([0.4, 0.3, 0.3])
 
     port_ret, port_loss = simulate_portfolio(mu, Sigma, w)
-    vol, var_99, es_99 = risk_measures_from_losses(port_ret, port_loss, alpha=0.99)
+    vol, var_99, es_99 = risk_measures_from_losses(
+        port_ret, port_loss, alpha=0.99
+    )
 
     print(f"Daily volatility estimate:      {vol:.5f}")
     print(f"99% one-day VaR estimate:       {var_99:.5f}")
