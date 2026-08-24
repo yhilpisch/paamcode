@@ -1,0 +1,36 @@
+{
+  "dataset_name": "Technology-universe return and feature panel",
+  "local_filename": "eod_tech_features.csv",
+  "source_institution": "The Python Quants GmbH",
+  "source_urls": [],
+  "attribution": "Derived from the bundled data/eod_tech.csv educational snapshot.",
+  "retrieval_date_utc": "2026-08-24",
+  "snapshot_date_range": {
+    "start": "2015-10-29",
+    "end": "2025-10-15"
+  },
+  "license_note": "Redistribution follows the terms applicable to the bundled source snapshot; the original vendor provenance is not recorded in this repository.",
+  "transformation_summary": "Converted adjusted prices to daily log-returns; calculated 20-day cross-sectional momentum z-scores and annualized rolling volatility; added next-day returns in excess of the same-day cross-sectional mean; removed incomplete rows.",
+  "chapter_usage": [
+    "ch10",
+    "ch11",
+    "ch12",
+    "ch13",
+    "ch14",
+    "ch15",
+    "ch16",
+    "ch19",
+    "ch20",
+    "ch21",
+    "ch23"
+  ],
+  "schema": {
+    "date": "Trading date associated with the contemporaneous features",
+    "ticker": "Asset ticker",
+    "log_ret": "Contemporaneous daily log-return",
+    "mom_20d_cs": "Cross-sectional z-score of cumulative 20-day log-return",
+    "vol_20d": "Annualized standard deviation of daily log-returns over 20 trading days",
+    "fwd_1d_excess_ret": "Next-day log-return minus the cross-sectional mean next-day log-return"
+  },
+  "generator": "code/tools/ch07_build_eod_features.py"
+}

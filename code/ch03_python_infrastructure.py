@@ -87,7 +87,7 @@ ax.set_ylabel("Index level")
 plt.show()
 
 # %% cell 21
-PROJECT_ROOT = Path("../")
+PROJECT_ROOT = Path(".")
 STRUCTURE = {
     "data": ["raw", "intermediate", "features"],
     "notebooks": [],

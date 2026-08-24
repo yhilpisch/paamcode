@@ -27,7 +27,7 @@ import time
 # %% cell 6
 CONFIG = {
     'data_file': DATA_PATH,
-    'reports_dir': Path('../reports'),
+    'reports_dir': Path('reports'),
     'feature_window': 20,
 }
 CONFIG

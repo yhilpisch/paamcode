@@ -80,7 +80,7 @@ feature_panel = build_features(filled)
 print(feature_panel.head().round(4))
 
 # %% cell 16
-OUTPUT_DIR = Path("../data/features")
+OUTPUT_DIR = Path("data/features")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 path = OUTPUT_DIR / "pyaiam_features.parquet"
 feature_panel.to_parquet(path)

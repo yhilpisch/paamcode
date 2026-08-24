@@ -4,14 +4,14 @@
   <img src="https://hilpisch.com/tpq_logo_bic.png" alt="The Python Quants" width="25%">
 </p>
 
-This repository contains the Jupyter notebooks and Python scripts that accompany the *Python and AI for Asset Management* class and book in the CPF Program. The material is organised to mirror the structure of the main text:
+This repository contains the Jupyter notebooks and Python scripts that accompany the *Python and AI for Asset Management* class and book in the CPF Program. The material covers the eight parts of the main text:
 
 - Part I — Foundations of Asset Management and Quantitative Methods  
 - Part II — Classical Asset Management Theory and Practice  
-- Part III — Risk and Active Risk Management  
-- Part IV — Machine Learning Foundations and Linear Models  
-- Part V — Tree-Based Methods, Deep Models, and Sequence Models  
-- Part VI — Unsupervised Learning, LLMs, and Assistants  
+- Part III — Risk Measures and Portfolio Risk Management
+- Part IV — Financial Data Science for Asset Management
+- Part V — Machine Learning for Asset Management
+- Part VI — Reinforcement and Unsupervised Learning
 - Part VII — From Research to Production: Risk, Governance, and Infrastructure  
 - Part VIII — LLMs, Agents, and Modern AI in Asset Management
 
@@ -39,11 +39,10 @@ The notebooks are designed to run in a standard scientific Python environment (o
 
 - Python 3.11+  
 - `numpy`, `pandas`, `matplotlib`  
-- `scipy`, `scikit-learn`, `statsmodels` (selected examples)  
-- `torch`, `torchvision` (deep learning and sequence models)  
-- `gymnasium` or similar RL environments where used
+- `scikit-learn`, `statsmodels` (selected examples)
+- `torch` (deep learning, sequence models, and RL examples)
 
-The scripts under `code/` are written so that you can either run them as standalone programs (for example to regenerate figures) or import their functions into your own research projects.
+Run the scripts under `code/` as standalone programs from the repository root. Reusable functions can be imported from scripts that expose an explicit function interface.
 
 ## Disclaimer
 

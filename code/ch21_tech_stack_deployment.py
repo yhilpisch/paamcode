@@ -31,8 +31,8 @@ parse_dates=["Date"]).set_index("Date").sort_index().ffill()
 # %% cell 8
 CONFIG = {
     "data_file": DATA_PATH,
-    "features_file": Path("../data/features/pyaiam_features.parquet"),
-    "reports_dir": Path("../reports"),
+    "features_file": Path("data/features/pyaiam_features.parquet"),
+    "reports_dir": Path("reports"),
     "recipients": ["research@tpq.io"],
 }
 CONFIG

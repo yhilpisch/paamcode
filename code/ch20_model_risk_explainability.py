@@ -52,7 +52,7 @@ experiment = {
     "train_start": str(X_train.index.min()),
     "train_end": str(X_train.index.max()),
 }
-log_path = Path("../reports") / "model_risk_rf.json"
+log_path = Path("reports") / "model_risk_rf.json"
 log_path.parent.mkdir(parents=True, exist_ok=True)
 log_path.write_text(json.dumps(experiment, indent=2))
 log_path

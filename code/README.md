@@ -45,5 +45,10 @@ The `figures/` subfolder contains small scripts that regenerate selected matplot
 - `ch07_aapl_logret_hist.py` — histogram and kernel density estimate of log‑returns.
 - `ch16_kmeans_clusters.py` — cluster visualisation for a stylised feature space.
 
-Each script is designed so that you can import its functions into your own projects or run it directly from the command line to reproduce the corresponding figure.
+Run these scripts directly from the repository root to reproduce the corresponding figures.
 
+## Data Utilities
+
+The `tools/` subfolder contains reproducible data-building utilities. Run
+`tools/ch07_build_eod_features.py` from the repository root to regenerate the
+derived technology feature panel.

@@ -59,7 +59,7 @@ class MockLLMClient:
 llm = MockLLMClient()
 
 # %% cell 12
-log_path = Path('../reports/model_risk_rf.json')
+log_path = Path('reports/model_risk_rf.json')
 if log_path.exists():
     metadata = json.loads(log_path.read_text())
 else:

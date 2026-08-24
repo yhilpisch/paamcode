@@ -6,6 +6,8 @@
 
 This folder contains the chapter and appendix notebooks for *Python and AI for Asset Management*. Each notebook mirrors the structure of a chapter and focuses on a coherent set of ideas, moving from classical portfolio theory to modern machine learning and reinforcement learning applications.
 
+The filenames retain the original 20-chapter companion sequence. Chapters 1--6 map directly to the manuscript. After that, notebook Chapter 7 maps to manuscript Chapter 10, and the three-chapter offset continues through notebook Chapter 20/manuscript Chapter 23. Manuscript Chapters 7--9 currently have scripts but no dedicated notebooks.
+
 ## Chapter Notebooks
 
 - `ch01_asset_management_basics.ipynb` — asset management landscape, basic portfolio objects, and data structures.
@@ -38,4 +40,3 @@ This folder contains the chapter and appendix notebooks for *Python and AI for A
 - `appx_g_repo_colab.ipynb` — working with the companion repository and Colab notebooks.
 
 To get started, open a notebook in your preferred Jupyter environment or in Google Colab, run the cells from top to bottom, and compare the results with the corresponding chapters and slide decks.
-
