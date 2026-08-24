@@ -42,23 +42,34 @@ ellipse = circle @ sqrt_sigma.T
 
 u1 = vecs[:, 0]
 u2 = vecs[:, 1]
-length = 1.15 * np.sqrt(vals[0])
+lengths = 1.15 * np.sqrt(np.maximum(vals, 0.0))
+end1 = u1 * lengths[0]
+end2 = u2 * lengths[1]
 
 fig, ax = plt.subplots(figsize=(8, 5.5))
-ax.plot(ellipse[:, 0], ellipse[:, 1], linewidth=1.6, label="1-sigma ellipse")
+ax.plot(
+    ellipse[:, 0],
+    ellipse[:, 1],
+    linewidth=1.6,
+    label="Mahalanobis radius 1",
+)
 ax.scatter(xc[:, 0], xc[:, 1], s=45, label="Centered states")
 
-ax.arrow(0.0, 0.0, u1[0] * length, u1[1] * length,
-         length_includes_head=True, head_width=0.01, head_length=0.03,
-         color="#d62728")
-ax.arrow(0.0, 0.0, u2[0] * length, u2[1] * length,
-         length_includes_head=True, head_width=0.01, head_length=0.03,
-         color="#2ca02c")
+ax.annotate(
+    "",
+    xy=end1,
+    xytext=(0.0, 0.0),
+    arrowprops={"arrowstyle": "->", "color": "#d62728", "lw": 1.5},
+)
+ax.annotate(
+    "",
+    xy=end2,
+    xytext=(0.0, 0.0),
+    arrowprops={"arrowstyle": "->", "color": "#2ca02c", "lw": 1.5},
+)
 
-ax.annotate("u1", xy=(u1[0] * length, u1[1] * length),
-            textcoords="offset points", xytext=(8, -14))
-ax.annotate("u2", xy=(u2[0] * length, u2[1] * length),
-            textcoords="offset points", xytext=(8, 8))
+ax.annotate("u1", xy=end1, textcoords="offset points", xytext=(8, -14))
+ax.annotate("u2", xy=end2, textcoords="offset points", xytext=(8, 8))
 
 ax.axhline(0.0, linewidth=0.8, color="black")
 ax.axvline(0.0, linewidth=0.8, color="black")

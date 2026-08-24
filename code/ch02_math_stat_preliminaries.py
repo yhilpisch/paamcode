@@ -139,9 +139,13 @@ sample_cov.loc[["AAPL", "NVDA", "SPY"], ["AAPL", "NVDA", "SPY"]]
 pair = ["AAPL", "TLT"]
 daily_cov = log_rets[pair].cov().values
 vals, vecs = np.linalg.eigh(daily_cov)
-angle = np.degrees(np.arctan2(*vecs[:, 1][::-1]))
-width, height = 2 * np.sqrt(vals)
-fig, ax = plt.subplots(figsize=(12, 6))
+order = np.argsort(vals)[::-1]  # largest eigenvalue first
+vals = vals[order]
+vecs = vecs[:, order]
+major_axis = vecs[:, 0]
+angle = np.degrees(np.arctan2(major_axis[1], major_axis[0]))
+width, height = 2 * np.sqrt(np.maximum(vals, 0.0))
+fig, ax = plt.subplots(figsize=(7, 7))
 ax.scatter(
     log_rets[pair[0]],
     log_rets[pair[1]],
@@ -161,6 +165,7 @@ ax.add_patch(ellipse)
 ax.set_xlabel(f"{pair[0]} log-returns")
 ax.set_ylabel(f"{pair[1]} log-returns")
 ax.set_title("Covariance Ellipse (AAPL vs. TLT)")
+ax.set_aspect("equal", adjustable="box")
 plt.show()
 
 # %% cell 18

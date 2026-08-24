@@ -40,9 +40,14 @@ theta = np.linspace(0.0, 2.0 * np.pi, 400)
 circle = np.column_stack([np.cos(theta), np.sin(theta)])
 ellipse = circle @ sqrt_sigma.T
 
-fig, ax = plt.subplots(figsize=(7, 5))
+fig, ax = plt.subplots(figsize=(7, 7))
 ax.scatter(xc[:, 0], xc[:, 1], s=45, label="Centered states")
-ax.plot(ellipse[:, 0], ellipse[:, 1], linewidth=1.6, label="1-sigma ellipse")
+ax.plot(
+    ellipse[:, 0],
+    ellipse[:, 1],
+    linewidth=1.6,
+    label="Mahalanobis radius 1",
+)
 ax.axhline(0.0, linewidth=0.8, color="black")
 ax.axvline(0.0, linewidth=0.8, color="black")
 ax.set_xlabel("Centered payoff 1")
@@ -50,6 +55,7 @@ ax.set_ylabel("Centered payoff 2")
 ax.set_title("Centered states and covariance ellipse")
 ax.grid(True, alpha=0.35)
 ax.legend(frameon=True)
+ax.set_aspect("equal", adjustable="box")
 
 fig.tight_layout()
 fig.savefig(OUT_DIR / "fig_cov_ellipse.png", dpi=300,
