@@ -1,3 +1,13 @@
+"""
+Python & AI in Asset Management
+Figure · AAPL Daily Log-Return Histogram (Chapter 7)
+
+(c) Dr. Yves J. Hilpisch
+AI-Powered by different LLMs
+The Python Quants GmbH | https://tpq.io
+https://hilpisch.com | https://linktr.ee/dyjh
+"""
+
 from pathlib import Path  # filesystem paths
 
 import matplotlib.pyplot as plt  # plotting
